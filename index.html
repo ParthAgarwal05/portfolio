@@ -15,7 +15,36 @@
             html {
                 scroll-behavior: smooth;
             }
+            .fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 1s ease-out, transform 1s ease-out;
+            }
+            
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
         </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const fadeIns = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeIns.forEach(fadeIn => {
+                observer.observe(fadeIn);
+            });
+        });
+        </script>
     </head>
 
     <body class="bg-gray-900">
@@ -24,23 +53,22 @@
 
             <div class="container max-w-screen-xl mx-auto px-4">
 
-                <nav class="flex flex-col md:flex-row mb-24 md:space-x-8 space-y-4 md:space-y-0 justify-center items-center">
+                <nav class="flex flex-col md:flex-row mb-8 md:space-x-8 space-y-4 md:space-y-0 justify-center items-center">
                     <a href="#projects" class="text-gray-300 text-xl hover:underline">Projects</a>
                     <a href="#education" class="text-gray-300 text-xl hover:underline">Education</a>
                     <a href="#skills" class="text-gray-300 text-xl hover:underline">Skills</a>
                     <a href="#experience" class="text-gray-300 text-xl hover:underline">Experience</a>
                     <a href="#contact" class="text-gray-300 text-xl hover:underline">Contact</a>
                 </nav>
-
-                <div class="text-center">
-                    <div class="flex justify-center mb-16 rounded-full">
-                        <img src="assets/myimg.png" alt="Image">
-                    </div>
+                <span class="w-[90%] bg-gray-300 mb-12 block" style="height: 1.5px;"></span>
+                <div class="text-center fade-in">
 
                     <h6 class="font-medium text-white text-4xl md:text-7xl mb-8">Hi, I'm Parth.</h6>
 
-                    <h1 class="font-normal text-gray-200 text-2xl md:text-4xl leading-none mb-8">Second year undergrad at IIT Indore.</h1>
-
+                    <h1 class="font-normal text-gray-200 text-2xl md:text-4xl leading-none mb-16">Second year undergrad at IIT Indore.</h1>
+                    <div class="flex justify-center mb-16 rounded-full">
+                        <img src="assets/my_img.png" alt="Image">
+                    </div>
                     <p class="font-normal text-gray-300 text-md md:text-xl mb-16">I have a strong passion for software development, machine learning and competitive programming. I'm currently pursuing B.Tech. in Computer Science at IIT Indore.</p>
 
                     <a href="assets/Resume.pdf" download class="px-7 py-3 md:px-9 md:py-4 font-medium md:font-semibold bg-gray-600 text-gray-50 text-sm rounded-md hover:bg-gray-50 hover:text-gray-700 transition ease-linear duration-500">Download CV</a>
@@ -52,7 +80,7 @@
 
         <section id="projects" class="py-10 md:py-16">
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="container fade-in max-w-screen-xl mx-auto px-4">
 
                 <div class="flex flex-col lg:flex-row justify-between">
                     <div class="mb-10 lg:mb-0">
@@ -99,7 +127,7 @@
 
         <section id="education" class="py-10 md:py-16">
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="container fade-in max-w-screen-xl mx-auto px-4">
 
                 <h1 class="font-medium text-gray-200 text-3xl md:text-4xl mb-5">Education</h1>
 
@@ -131,7 +159,7 @@
 
         <section id="skills" class="py-10 md:py-16">
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="container fade-in max-w-screen-xl mx-auto px-4">
                 <h1 class="font-medium text-gray-200 text-3xl md:text-4xl mb-5">Skills</h1>
 
                 <p class="font-normal text-gray-300 text-xs md:text-base mb-20">Below is a summary of my technical skills.</p>
@@ -179,7 +207,7 @@
 
         <section id="experience" class="py-10 md:py-16">
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="container fade-in max-w-screen-xl mx-auto px-4">
 
                 <h1 class="font-medium text-gray-200 text-3xl md:text-4xl mb-5">Experience</h1>
 
@@ -214,28 +242,37 @@
 
         </section>
 
-        <footer id="contact" class="py-10 md:py-16 mb-20 md:mb-40 lg::mb-52">
+        <footer id="contact" class="py-10 md:py-16 mb-20 md:mb-24 lg:mb-16">
 
-            <div class="container max-w-screen-xl mx-auto px-4">
+            <div class="container fade-in max-w-screen-xl mx-auto px-4">
 
                 <div class="text-center">
                     <h1 class="font-medium text-gray-200 text-4xl md:text-5xl mb-5">Get in Touch</h1>
 
-                    <p class="font-normal text-gray-300 text-md md:text-lg mb-20">Feel free to reach out to me for other inquiries.</p>
+                    <p class="font-normal text-gray-300 text-md md:text-lg mb-12">Feel free to reach out to me for other inquiries.</p>
 
                     <div class="flex items-center justify-center space-x-8">
-                        <a href="https://www.linkedin.com/in/parth-agarwal-5a90862b0/" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="linkedin" class="text-gray-400 hover:text-gray-800 transition ease-in-out duration-500"></i>
-                        </a>
-    
-                        <a href="mailto:paag4444@gmail.com" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="at-sign" class="text-gray-400 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a>
-    
-                        <a href="https://www.instagram.com/parth_413_/" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-gray-200 transition ease-in-out duration-500">
-                            <i data-feather="instagram" class="text-gray-400 hover:text-gray-700 transition ease-in-out duration-500"></i>
-                        </a>
+                        <div class="flex flex-col items-center space-y-1">
+                            <a href="https://www.linkedin.com/in/parth-agarwal-5a90862b0/" class="flex items-center justify-center w-16 h-16 hover:bg-gray-200 rounded-full transition ease-in-out duration-500">
+                                <i data-feather="linkedin" class="text-gray-400 hover:text-gray-800 transition ease-in-out duration-500"></i>
+                            </a>
+                            <span class="text-md font-medium text-gray-400">LinkedIn</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-1">
+                            <a href="mailto:paag4444@gmail.com" class="flex items-center justify-center w-16 h-16 hover:bg-gray-200 rounded-full transition ease-in-out duration-500">
+                                <i data-feather="at-sign" class="text-gray-400 hover:text-gray-700 transition ease-in-out duration-500"></i>
+                            </a>
+                            <span class="text-md font-medium text-gray-400">Mail</span>
+                        </div>
+                        <div class="flex flex-col items-center space-y-1">
+                            <a href="https://www.instagram.com/parth_413_/" class="flex items-center justify-center w-16 h-16 hover:bg-gray-200 rounded-full transition ease-in-out duration-500">
+                                <i data-feather="instagram" class="text-gray-400 hover:text-gray-700 transition ease-in-out duration-500"></i>
+                            </a>
+                            <span class="text-md font-medium text-gray-400">Instagram</span>
+                        </div>
                     </div>
+                    
+                    
                 </div>
 
             </div>
